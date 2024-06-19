@@ -18,6 +18,18 @@ const componentGameStart = document.getElementById('gameStart');
 const overlay = document.getElementById('overlay');
 const countdownElement = overlay.querySelector('.countdown');
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+      console.log('Permiso concedido');
+      // Puedes manejar el stream de audio aquí
+    })
+    .catch(error => {
+      console.error('Permiso denegado o hubo un error: ', error);
+    });
+})
+
 function startAudioCapture() {
   console.info("Iniciando captura de audio...");
 
@@ -66,7 +78,7 @@ function startAudioCapture() {
           maxIntensity = intensity;
         }
 
-        console.info("max: ",maxIntensity, " intensity: ",intensity);
+        console.info("max: ", maxIntensity, " intensity: ", intensity);
 
         let percentage = (average / 255) * 100;
         percentage = Math.min(percentage, 100);
@@ -167,7 +179,7 @@ function stopAudioCapture() {
   isScreaming = false;
   // Detener cualquier temporizador activo
   clearTimeout(timer);
-  
+
   if (microphone) {
     alert('Termino el tiempo :(');
   }
