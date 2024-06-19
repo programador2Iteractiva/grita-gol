@@ -28,8 +28,76 @@
     <!-- main button -->
     <div class="external-container-inicio" style="position: relative;">
         <div class="position-relative">
-            <img src="assets/Mic+Circle.png" alt="Imagen centrada" class="img-fluid-mic" />
-            <button class="custom-button" onclick="startAudioCapture()">¡a jugar!</button>
+            <img src="assets/Mic+Circle.png" alt="Imagen centrada" id="img-micro" class="img-fluid-mic" style="display: block;" />
+            <button class="custom-button" id="button-play" style="display: block;">¡a jugar!</button>
+
+
+            <!-- component starting game  -->
+            <div class="d-flex flex-column align-items-center" id="gameStart" style="display: none!important">
+                <div class="triangle-text text-center text-white mb-4">
+                    <p class="h5">¡Que comience el juego!</p>
+                    <p class="h5">y que los mejores pulmones ganen!</p>
+                </div>
+
+                <div class="d-flex justify-content-center align-items-center position-relative" id="imgonda" style="height: 200px">
+                  <!-- onda queda detras imagen principal -->
+                  <img
+                    src="assets/Onda.png"
+                    alt="Imagen de fondo"
+                    class="position-absolute img-fluid-mic"
+                    style="top: 45%; left: 50%; transform: translate(-50%, -50%); max-width: 40%""
+                  />
+
+                  <!-- imagen que quedara adelante -->
+                  <img
+                    src="assets/Mic+Circle-2.png"
+                    alt="Imagen centrada"
+                    class="img-fluid-mic"
+                    style=" z-index: 0"
+                />
+                </div>
+                <button class="custom-button-gol" id="startingScream">¡grita gol!</button>
+            </div>
+
+            <!-- Overlay -->
+            <div id="overlay" class="overlay" style="display: none;">
+              <div class="countdown-container" style="margin-top: 20%">
+                  <div class="countdown"></div>
+              </div>
+            </div>
+
+
+            <!-- vista puntaje -->
+            <div class="d-flex flex-column align-items-center" id="counterScore" style="display: none!important">
+              <div class="card shadow shadow-lg w-120">
+                <div class="card-title text-center p-2 mt-3 mb-3">
+                  <h4 class="title-score">¡excelente grito!</h4>
+                  <p class="d-title-score text-center">estamos cargando tus puntos</p>
+                </div>
+              </div>  
+              <div class="card p-3">
+                  <div class="counter mt-2">
+                    <div class="digit" id="digit-1">0</div>
+                    <div class="digit" id="digit-2">0</div>
+                    <div class="digit" id="digit-3">0</div>
+                    <div class="digit" id="digit-4">0</div>
+                    <div class="digit" id="digit-5">0</div>
+                    <div class="digit" id="digit-6">0</div>
+                </div>
+              </div>
+              <!-- <div class="counter-container">
+                <div class="counter-title mb-0">
+                  <h4 class="text-danger mt-3 span">¡excelente grito!</h4>
+                  <h4 class="text-danger text m-margin">estamos cargando tus puntos</h4>
+                </div>
+                <div class="counter mt-4">
+                  <div class="digit-container">
+                  </div>
+                  <div class="digit" id="digit-number"></div>
+                </div>
+              </div> -->
+            </div>
+
         </div>
 
         <!-- footer -->
@@ -42,25 +110,8 @@
         </footer>
     </div>
 
-    <!-- <div class="counter-container">
-      <div class="counter-title mb-0">
-        <h4 class="text-danger mt-3 span">¡excelente grito!</h4>
-        <h4 class="text-danger text m-margin">estamos cargando tus puntos</h4>
-      </div>
-      <div class="counter mt-4">
-        <div class="digit-container">
-        </div>
-        <div class="digit" id="digit-number"></div>
-      </div>
-    </div> -->
-
-    <!-- captura inicial diseño -->
-     <div >
-
-     </div>
-
-    <button >Iniciar Captura de Audio</button>
         <script src="js/main.js" type="module"></script>
+        <script src="js/changesViews.js"></script>
       </body>
     </html>
   </body>
