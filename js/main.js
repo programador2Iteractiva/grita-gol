@@ -88,11 +88,12 @@ function startAudioCapture() {
           if (intensity <= maxIntensity && !isScreaming) {
             // Grito de gol detectado
             isScreaming = true;
+            console.log(isScreaming)
             console.log('Grito de gol detectado');
           }
 
           if (isScreaming) {
-            if (intensity < maxIntensity - 10) {
+            if (intensity < maxIntensity - 5) {
               // Fin del grito de gol
               stopAudioCapture();
               console.log('Fin del grito de gol detectado');
@@ -159,15 +160,17 @@ startScream.addEventListener('click', () => {
 
 // Función para detener la captura de audio
 function stopAudioCapture() {
-  if (microphone) {
-    microphone.disconnect();
-    analyser.disconnect();
-    audioContext.close();
-  }
+  microphone.disconnect();
+  analyser.disconnect();
+  audioContext.close();
   isMeasuring = false;
   isScreaming = false;
   // Detener cualquier temporizador activo
   clearTimeout(timer);
+  
+  if (microphone) {
+    alert('Termino el tiempo :(');
+  }
 
   // Cerrar el contexto de audio si está abierto
   if (audioContext && audioContext.state !== "closed") {
