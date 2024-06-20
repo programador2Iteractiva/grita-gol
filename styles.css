@@ -360,3 +360,29 @@
   color: red;
   font-weight: 100;
 }
+
+.moving-background {
+  position: absolute;
+  bottom: -20%; /* Empieza la animación desde abajo del contenedor */
+  right: -20%; /* Empieza la animación desde la derecha del contenedor */
+  width: 120%; /* Ajusta el ancho para cubrir toda la pantalla */
+  height: 120%; /* Ajusta la altura para cubrir toda la pantalla */
+  overflow: hidden;
+}
+
+.moving-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  animation: moveDiagonalReverse 10s linear infinite;
+}
+
+@keyframes moveDiagonalReverse {
+  0% {
+    transform: translateX(0%) translateY(0%); /* Empieza en la esquina inferior izquierda */
+  }
+  100% {
+    transform: translateX(130%) translateY(-300%); /* Termina fuera del contenedor a la derecha arriba */
+  }
+}

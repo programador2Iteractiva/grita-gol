@@ -14,6 +14,7 @@ let microphone;
 const startScream = document.getElementById('startingScream');
 const counterScore = document.getElementById('counterScore');
 const componentGameStart = document.getElementById('gameStart');
+const plane = document.getElementById('plane');
 
 const overlay = document.getElementById('overlay');
 const countdownElement = overlay.querySelector('.countdown');
@@ -105,7 +106,7 @@ function startAudioCapture() {
           }
 
           if (isScreaming) {
-            if (intensity < maxIntensity - 5) {
+            if (intensity < maxIntensity - 2) {
               // Fin del grito de gol
               stopAudioCapture();
               console.log('Fin del grito de gol detectado');
@@ -164,6 +165,7 @@ startScream.addEventListener('click', () => {
         overlay.style.display = 'none';
         componentGameStart.classList.add('d-none');
         counterScore.style.display = 'block';
+        plane.style.display = 'block'
         startAudioCapture();
       }, 1000);
     }
