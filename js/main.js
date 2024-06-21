@@ -6,6 +6,7 @@ let lastIntensity = 0;
 let isMeasuring = false;
 let isScreaming = false;
 let timer; // Variable para el temporizador
+const isclosed = false;
 
 const intensityThreshold = 15;
 const silenceThreshold = -40;
@@ -15,16 +16,17 @@ const startScream = document.getElementById('startingScream');
 const counterScore = document.getElementById('counterScore');
 const componentGameStart = document.getElementById('gameStart');
 const plane = document.getElementById('plane');
+const avion = document.getElementById('avion');
+const btnReload = document.getElementById('reload');
 
 const overlay = document.getElementById('overlay');
 const countdownElement = overlay.querySelector('.countdown');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  navigator.mediaDevices.getUserMedia({ audio: true })
-    .then(stream => {
-      console.log('Permiso concedido');
-      // Puedes manejar el stream de audio aquí
+  navigator.mediaDevices
+    .getUserMedia({ audio: true })
+    .then(function (stream) {
     })
     .catch(error => {
       console.error('Permiso denegado o hubo un error: ', error);
@@ -46,6 +48,8 @@ function startAudioCapture() {
     .then(function (stream) {
       microphone = audioContext.createMediaStreamSource(stream);
       microphone.connect(analyser);
+
+      console.log(microphone)
 
       analyser.fftSize = 2048;
       maxIntensity = 0;
@@ -106,9 +110,19 @@ function startAudioCapture() {
           }
 
           if (isScreaming) {
-            if (intensity < maxIntensity - 2) {
+            if (intensity < maxIntensity - 3) {
               // Fin del grito de gol
-              stopAudioCapture();
+              microphone.disconnect();
+              analyser.disconnect();
+              audioContext.close();
+              isMeasuring = false;
+              isScreaming = false;
+              // Detener cualquier temporizador activo
+              clearTimeout(timer);
+              avion.classList.add('d-none');
+            
+              // Cerrar el contexto de audio si está abierto
+              alert('Termino el tiempo :(');
               console.log('Fin del grito de gol detectado');
             }
           }
@@ -117,7 +131,15 @@ function startAudioCapture() {
         lastIntensity = intensity;
 
         // Llamar a processAudio aproximadamente cada 1/60 segundos
-        timer = setTimeout(processAudio, 1000 / 1);
+        if (isScreaming) {
+          timer = setTimeout(processAudio, 1000 / 1);
+        }
+
+        if (!isScreaming) {
+          // mostramos el boton
+          btnReload.classList.remove('d-none')
+          btnReload.classList.add('d-block')
+        }
       }
 
       // Iniciar el proceso de audio
@@ -142,6 +164,10 @@ function updateCounter(score, digits) {
     }
   }
 }
+
+btnReload.addEventListener('click', () => {
+  window.location.reload();
+})
 
 startScream.addEventListener('click', () => {
   let countdown = 5;
@@ -174,22 +200,6 @@ startScream.addEventListener('click', () => {
 
 // Función para detener la captura de audio
 function stopAudioCapture() {
-  microphone.disconnect();
-  analyser.disconnect();
-  audioContext.close();
-  isMeasuring = false;
-  isScreaming = false;
-  // Detener cualquier temporizador activo
-  clearTimeout(timer);
-
-  if (microphone) {
-    alert('Termino el tiempo :(');
-  }
-
-  // Cerrar el contexto de audio si está abierto
-  if (audioContext && audioContext.state !== "closed") {
-    audioContext.close().then(function () {
-      console.log("Contexto de audio cerrado correctamente.");
-    });
-  }
+  
+ 
 }
