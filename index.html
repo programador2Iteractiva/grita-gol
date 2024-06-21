@@ -10,10 +10,13 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Grita Gol</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body class="overflow-hidden">
+  <body class="overflow-hidden" id="anywhere">
+    <div id="startingScream">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <h3 class="navbar-brand p-3 text-danger">
@@ -32,12 +35,8 @@
       </div>
 
         <div class="position-relative">
-            <img src="assets/Mic+Circle.png" alt="Imagen centrada" id="img-micro" class="img-fluid-mic" style="display: block;" />
-            <button class="custom-button" id="button-play" style="display: block;">¡a jugar!</button>
-
-
             <!-- component starting game  -->
-            <div class="d-flex flex-column align-items-center" id="gameStart" style="display: none!important">
+            <div class="d-flex flex-column align-items-center" id="gameStart">
                 <div class="triangle-text text-center text-white mb-4">
                     <p class="h5">¡Que comience el juego!</p>
                     <p class="h5">y que los mejores pulmones ganen!</p>
@@ -72,13 +71,30 @@
 
 
             <!-- vista puntaje -->
+            
             <div class="d-flex flex-column align-items-center" id="counterScore" style="display: none!important">
-              <div class="card shadow shadow-lg w-120">
+              <div class="triangle-text text-center text-white mb-4 d-none" id="titleGameTerminated">
+                <p class="h5 text-white custom-label">¡tus puntos están listos!</p>
+            </div>
+            
+              <!-- colocamos la card que tendra la puntuacion -->
+              <div class="card shadow shadow-lg w-120 d-block" id="adviserScream">
                 <div class="card-title text-center p-2 mt-3 mb-3">
                   <h4 class="title-score">¡excelente grito!</h4>
                   <p class="d-title-score text-center">estamos cargando tus puntos</p>
                 </div>
-              </div>  
+              </div> 
+
+
+              <!-- aparecemos la card que tendra el texto -->
+
+              <div class="custom-puntaje card shadow shadow-lg custom-with d-none" id="cardPointsTerminated">
+                <div class="card-title text-center mt-3 mb-3">
+                  <h4 class="title-puntaje">tu puntaje:</h4>
+                </div>
+              </div> 
+
+
               <div class="card p-3">
                 <div class="counter mt-2">
                   <div class="digit" id="digit-1">0</div>
@@ -90,7 +106,7 @@
                 </div>
               </div>
 
-              <button class="custom-button-gol d-none" id="reload">Reiniciar</button>
+              <button class="btn-back d-none" id="reload">Volver</button>
             </div>
 
         </div>
@@ -109,5 +125,6 @@
         <script src="js/changesViews.js"></script>
       </body>
     </html>
+    </div>
   </body>
 </html>

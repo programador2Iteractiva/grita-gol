@@ -7,6 +7,7 @@ let isMeasuring = false;
 let isScreaming = false;
 let timer; // Variable para el temporizador
 const isclosed = false;
+let timerSwallClose = 0;
 
 const intensityThreshold = 15;
 const silenceThreshold = -40;
@@ -18,6 +19,9 @@ const componentGameStart = document.getElementById('gameStart');
 const plane = document.getElementById('plane');
 const avion = document.getElementById('avion');
 const btnReload = document.getElementById('reload');
+const adviserStar = document.getElementById('adviserScream');
+const gameTerminatedText = document.getElementById('titleGameTerminated');
+const cardTerminatedGame = document.getElementById('cardPointsTerminated')
 
 const overlay = document.getElementById('overlay');
 const countdownElement = overlay.querySelector('.countdown');
@@ -110,20 +114,31 @@ function startAudioCapture() {
           }
 
           if (isScreaming) {
-            if (intensity < maxIntensity - 3) {
-              // Fin del grito de gol
-              microphone.disconnect();
-              analyser.disconnect();
-              audioContext.close();
-              isMeasuring = false;
-              isScreaming = false;
-              // Detener cualquier temporizador activo
-              clearTimeout(timer);
-              avion.classList.add('d-none');
+
+            if (intensity <= 0) {
+              setTimeout(() => {
+                close();
+
+                Swal.fire({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'no gritaste, termino el juego',
+                  customClass: {
+                    title: "text-center"
+                  },
+                  showConfirmButton: false, // Mostrar el botón de confirmación
+                  timer: 2500,
+                  timerProgressBar: true,
+                });
+  
+                window.location.reload();
+              }, 3000)
+
+            }
             
-              // Cerrar el contexto de audio si está abierto
-              alert('Termino el tiempo :(');
-              console.log('Fin del grito de gol detectado');
+            if (intensity < maxIntensity - 3) {
+              close();
             }
           }
         }
@@ -198,8 +213,27 @@ startScream.addEventListener('click', () => {
   }, 1000);
 })
 
-// Función para detener la captura de audio
-function stopAudioCapture() {
-  
- 
+function close() {
+  // Fin del grito de gol
+  microphone.disconnect();
+  analyser.disconnect();
+  audioContext.close();
+  isMeasuring = false;
+  isScreaming = false;
+  // Detener cualquier temporizador activo
+  clearTimeout(timer);
+  avion.classList.add('d-none');
+
+  // removemos el aviso
+  adviserStar.classList.remove('d-block');
+  adviserStar.classList.add('d-none');
+
+  // mostramos titulo de puntos
+  gameTerminatedText.classList.remove('d-none');
+  gameTerminatedText.classList.add('d-block');
+
+  // mostramos tu puntaje
+  cardTerminatedGame.classList.remove('d-none');
+  cardTerminatedGame.classList.add('d-block')
+  console.log('Fin del grito de gol detectado');
 }

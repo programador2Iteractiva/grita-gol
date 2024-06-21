@@ -254,7 +254,7 @@
 
 .custom-button-gol {
   position: absolute;
-  bottom: -60px;
+  bottom: -40px;
   background: linear-gradient(to bottom, #ffdd33, #ffa800);
   border: none;
   border-radius: 40px;
@@ -338,12 +338,24 @@
   margin: 5px;
   border-radius: 5px;
   box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.2);
-  transition: transform 0.6s ease-in-out; /* Transición para la transformación */
+  transition: transform 15s cubic-bezier(0.23, 1, 0.32, 1); /* Cambiamos la curva de la transición */
 }
 
 /* Estilo para rotar el dígito */
 .digit.rotate {
-  transform: rotateY(360deg); /* Rotación de 360 grados en el eje Y */
+  animation: rotateUpDown 1.2s ease-in-out; /* Animación para simular la rueda giratoria */
+}
+
+@keyframes rotateUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .w-120 {
@@ -380,7 +392,7 @@
   bottom: 0rem;
   left: 0;
   width: 40%;
-  animation: moveDiagonalReverse 15s linear infinite;
+  animation: moveDiagonalReverse 45s linear infinite;
 }
 
 @keyframes moveDiagonalReverse {
@@ -388,6 +400,57 @@
     transform: translateX(-100%) translateY(0%);
   }
   100% {
-    transform: translateX(200%) translateY(-100%);
+    transform: translateX(300%) translateY(-100%);
   }
+}
+
+.custom-puntaje {
+  position: absolute;
+  bottom: 120px;
+  background: linear-gradient(to bottom, #ffdd33, #ffa800);
+  border: none;
+  border-radius: 100px;
+  color: #693300;
+  padding: 5px 50px;
+  font-size: 30px !important;
+  font-weight: bold;
+  /* cursor: pointer; */
+  box-shadow: 0 12px #e68e0a;
+  /* transition: all 0.2s ease; */
+  margin-right: 0px;
+}
+
+.custom-with {
+  width: 100% !important;
+  top: -80px;
+  z-index: 1;
+}
+
+.title-puntaje {
+  color: white;
+  font-weight: bold;
+  font-size: -webkit-xxx-large;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.custom-label {
+  margin-top: -130px;
+}
+
+
+.btn-back {
+    position: absolute;
+    bottom: -80px;
+    background: linear-gradient(to bottom, #ffdd33, #ffa800);
+    border: none;
+    border-radius: 40px;
+    color: #693300;
+    padding: 5px 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 7px #e68e0a;
+    transition: all 0.2s ease;
+    margin-right: 7px;
 }
