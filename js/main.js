@@ -113,30 +113,8 @@ function startAudioCapture() {
             console.log('Grito de gol detectado');
           }
 
+
           if (isScreaming) {
-
-            if (intensity <= 0) {
-              setTimeout(() => {
-                close();
-
-                Swal.fire({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'error',
-                  title: 'no gritaste, termino el juego',
-                  customClass: {
-                    title: "text-center"
-                  },
-                  showConfirmButton: false, // Mostrar el botón de confirmación
-                  timer: 2500,
-                  timerProgressBar: true,
-                });
-  
-                window.location.reload();
-              }, 3000)
-
-            }
-            
             if (intensity < maxIntensity - 3) {
               close();
             }
@@ -149,6 +127,38 @@ function startAudioCapture() {
         if (isScreaming) {
           timer = setTimeout(processAudio, 1000 / 1);
         }
+
+        if (intensity <= 0) {
+          setTimeout(() => {
+            close();
+
+            let timerInterval = 0;
+
+            // Mostrar el toast
+            Swal.fire({
+              toast: true,
+              position: 'top-end',
+              icon: 'error',
+              title: 'no gritaste, termino el juego',
+              customClass: {
+                title: "text-center"
+              },
+              showConfirmButton: false, // Mostrar el botón de confirmación
+              timer: 2500,
+              timerProgressBar: true,
+              willClose: () => {
+                timerInterval = 1;
+              }
+            }).then(() => {
+              // Después de que el toast desaparezca, recargar la página
+              setTimeout(() => {
+                window.location.reload();
+              }, 3000);
+            });
+
+          }, 3000);
+        }
+
 
         if (!isScreaming) {
           // mostramos el boton
@@ -214,6 +224,7 @@ startScream.addEventListener('click', () => {
 })
 
 function close() {
+
   // Fin del grito de gol
   microphone.disconnect();
   analyser.disconnect();
