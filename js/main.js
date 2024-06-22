@@ -8,10 +8,12 @@ let isScreaming = false;
 let timer; // Variable para el temporizador
 const isclosed = false;
 let timerSwallClose = 0;
+var digitHeight = $('.digit div').height();
 
 const intensityThreshold = 15;
 const silenceThreshold = -40;
 let microphone;
+var hasclicked = false;
 
 const startScream = document.getElementById('startingScream');
 const counterScore = document.getElementById('counterScore');
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })
 
+// Function to start audio capture
 function startAudioCapture() {
   console.info("Iniciando captura de audio...");
 
@@ -53,7 +56,7 @@ function startAudioCapture() {
       microphone = audioContext.createMediaStreamSource(stream);
       microphone.connect(analyser);
 
-      console.log(microphone)
+      console.log(microphone);
 
       analyser.fftSize = 2048;
       maxIntensity = 0;
@@ -61,17 +64,6 @@ function startAudioCapture() {
 
       let bufferLength = analyser.frequencyBinCount;
       let dataArray = new Uint8Array(bufferLength);
-
-
-
-      let digits = [
-        document.getElementById("digit-1"),
-        document.getElementById("digit-2"),
-        document.getElementById("digit-3"),
-        document.getElementById("digit-4"),
-        document.getElementById("digit-5"),
-        document.getElementById("digit-6"),
-      ];
 
       // Función para procesar el audio y calcular el puntaje
       function processAudio() {
@@ -98,11 +90,11 @@ function startAudioCapture() {
         // Actualizar currentScore solo si newScore es mayor
         if (newScore > currentScore) {
           currentScore = newScore;
+          updateCounter(currentScore); // Update the counter when the score changes
         }
 
         // Mostrar el score actualizado
         console.log("Score:", currentScore);
-        updateCounter(currentScore, digits);
 
         if (isMeasuring) {
           console.log("entro a measuri")
@@ -113,41 +105,38 @@ function startAudioCapture() {
             console.log('Grito de gol detectado');
           }
 
-          console.log("antes if")
-          setTimeout(() => {
-            if (maxIntensity === 0) {
-              close();
-          
-              console.log("en medio del if", maxIntensity);
-          
-              // Mostrar el toast
-              Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: 'no gritaste, termino el juego',
-                customClass: {
-                  title: "text-center"
-                },
-                showConfirmButton: false, // Mostrar el botón de confirmación
-                timer: 2500,
-                timerProgressBar: true,
-              }).then(() => {
-                // Después de que el toast desaparezca, recargar la página
-                setTimeout(() => {
-                  window.location.reload();
-                }, 3000);
-              });
-            }
-          }, 3000);
-          console.log("abajo if")
+          // setTimeout(() => {
+          //   if (maxIntensity === 0) {
+          //     close();
 
+          //     console.log("en medio del if", maxIntensity);
+
+          //     // Mostrar el toast
+          //     Swal.fire({
+          //       toast: true,
+          //       position: 'top-end',
+          //       icon: 'error',
+          //       title: 'no gritaste, termino el juego',
+          //       customClass: {
+          //         title: "text-center"
+          //       },
+          //       showConfirmButton: false, // Mostrar el botón de confirmación
+          //       timer: 2500,
+          //       timerProgressBar: true,
+          //     }).then(() => {
+          //       // Después de que el toast desaparezca, recargar la página
+          //       setTimeout(() => {
+          //         window.location.reload();
+          //       }, 2500);
+          //     });
+          //   }
+          // }, 1500);
 
           if (isScreaming) {
             if (intensity < maxIntensity - 3) {
               close();
-            } 
-          } 
+            }
+          }
         }
 
         lastIntensity = intensity;
@@ -157,9 +146,7 @@ function startAudioCapture() {
           timer = setTimeout(processAudio, 1000 / 1);
         }
 
-
         if (!isScreaming) {
-
           // mostramos el boton
           btnReload.classList.remove('d-none')
           btnReload.classList.add('d-block')
@@ -174,26 +161,67 @@ function startAudioCapture() {
     });
 }
 
-function updateCounter(score, digits) {
-  const scoreStr = String(score).padStart(digits.length, '0'); // Asegurar que siempre tenga 6 dígitos
-
-  for (let i = 0; i < digits.length; i++) {
-    const digitIndex = digits.length - 1 - i; // Distribuir desde el final al principio
-    if (digits[digitIndex].innerText !== scoreStr[digitIndex]) {
-      digits[digitIndex].style.transform = 'translateY(-100%)';
-      setTimeout(() => {
-        digits[digitIndex].innerText = scoreStr[digitIndex];
-        digits[digitIndex].style.transform = 'translateY(0)';
-      }, 500);
-    }
-  }
+// Function to update a single digit
+function updateDigit(digit, value) {
+  var digitHeight = $(digit).children('div').height(); // Adjust this to your digit height
+  var translateY = -value * digitHeight;
+  $(digit).children('div').css('transform', 'translateY(' + translateY + 'px)');
 }
+
+// Function to update the counter display
+function updateCounter(number) {
+  var numberStr = number.toString().padStart(6, '0'); // Adjust to 6 digits
+  $('.digit').each(function (index) {
+    var digitValue = parseInt(numberStr[index]);
+    updateDigit(this, digitValue);
+  });
+}
+
+// Function to start the counter animation
+function startCounter(initialNumber, finalNumber) {
+  targetNumber = finalNumber;
+  clearInterval(interval);
+  var currentNumber = initialNumber;
+
+  // Determine the direction of the counter
+  var increment = initialNumber < finalNumber ? 1 : -1;
+
+  interval = setInterval(function () {
+    updateCounter(currentNumber);
+    currentNumber += increment;
+
+    // Check if the final number is reached
+    if ((increment > 0 && currentNumber > finalNumber) || (increment < 0 && currentNumber < finalNumber)) {
+      clearInterval(interval);
+      updateCounter(finalNumber); // Ensure the counter ends exactly at finalNumber
+    }
+  }, 200); // Increment every 200 ms
+}
+
+// Document ready function
+$(document).ready(function () {
+  $('#startCounter').click(function () {
+    var inputNumber = parseInt($('#inputNumber').val());
+    if (!isNaN(inputNumber)) {
+      startCounter(0, inputNumber);
+    }
+  });
+});
+
+
 
 btnReload.addEventListener('click', () => {
   window.location.reload();
 })
 
 startScream.addEventListener('click', () => {
+  if (hasclicked === true) {
+    return;
+  }
+
+
+  hasclicked = true;
+
   let countdown = 5;
 
   // Mostrar el overlay
