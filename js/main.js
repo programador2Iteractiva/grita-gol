@@ -85,7 +85,7 @@ function startAudioCapture() {
         percentage = Math.min(percentage, 100);
 
         // Calcular el nuevo score y multiplicarlo por 100
-        let newScore = Math.round(percentage * 25);
+        let newScore = Math.round(percentage * 25) ;
 
         // Actualizar currentScore solo si newScore es mayor
         if (newScore > currentScore) {
@@ -133,6 +133,9 @@ function startAudioCapture() {
           }, 1500);
 
           if (isScreaming) {
+            // sumamos 1 al score 
+            currentScore+=1;
+
             if (intensity < maxIntensity - 3) {
               close();
             }
