@@ -39,8 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })
 
-// Function to start audio capture
+
 function startAudioCapture() {
+  let percentage = 0; // Inicializa percentage a 0
+  let screamSeconds = 0; // Variable para contar los segundos del grito
+  let silenceTimer = null; // Timer para detectar silencio
+
   console.info("Iniciando captura de audio...");
 
   // Verificar si el contexto de Audio ya está creado
@@ -81,7 +85,8 @@ function startAudioCapture() {
 
         console.info("max: ", maxIntensity, " intensity: ", intensity);
 
-        let percentage = (average / 255) * 100;
+        // Calcular percentage considerando screamSeconds
+        percentage = ((average / 255) * 100) + screamSeconds; // Suma screamSeconds al percentage
         percentage = Math.min(percentage, 100);
 
         // Calcular el nuevo score y multiplicarlo por 100
@@ -90,66 +95,87 @@ function startAudioCapture() {
         // Actualizar currentScore solo si newScore es mayor
         if (newScore > currentScore) {
           currentScore = newScore;
-          updateCounter(currentScore); // Update the counter when the score changes
+          updateCounter(currentScore); // Actualiza el contador cuando cambia el puntaje
         }
 
-        // Mostrar el score actualizado
-        console.log("Score:", currentScore);
+        // Mostrar el puntaje actualizado
+        console.log("Puntaje:", currentScore);
 
+        // Lógica para detectar si el usuario está hablando (gritando)
         if (isMeasuring) {
-          console.log("entro a measuri")
+          console.log("Entrando a medición");
           if (intensity <= maxIntensity && !isScreaming) {
-            // Grito de gol detectado
+            // Grito detectado
             isScreaming = true;
-            console.log(isScreaming)
-            console.log('Grito de gol detectado');
+            screamSeconds = 0; // Reiniciar los segundos de grito
+            console.log(isScreaming);
+            console.log('¡Grito detectado!');
+
+            // Reiniciar el temporizador de silencio si existe
+            if (silenceTimer) {
+              clearTimeout(silenceTimer);
+              silenceTimer = null;
+            }
+          } else if (isScreaming && intensity > maxIntensity) {
+            // Si estamos gritando pero la intensidad es alta, considerar que aún se está gritando
+            if (silenceTimer) {
+              clearTimeout(silenceTimer);
+              silenceTimer = null;
+            }
+          } else {
+            // Si no se detecta un grito, iniciar el temporizador de silencio
+            setTimeout(() => {
+              if (maxIntensity === 0) {
+                close();
+  
+                console.log("en medio del if", maxIntensity);
+  
+                // Mostrar el toast
+                Swal.fire({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'no gritaste, termino el juego',
+                  customClass: {
+                    title: "text-center"
+                  },
+                  showConfirmButton: false, // Mostrar el botón de confirmación
+                  timer: 2500,
+                  timerProgressBar: true,
+                }).then(() => {
+                  // Después de que el toast desaparezca, recargar la página
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 2500);
+                });
+              }
+            }, 1500);
+
+
           }
 
-          setTimeout(() => {
-            if (maxIntensity === 0) {
-              close();
-
-              console.log("en medio del if", maxIntensity);
-
-              // Mostrar el toast
-              Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: 'no gritaste, termino el juego',
-                customClass: {
-                  title: "text-center"
-                },
-                showConfirmButton: false, // Mostrar el botón de confirmación
-                timer: 2500,
-                timerProgressBar: true,
-              }).then(() => {
-                // Después de que el toast desaparezca, recargar la página
-                setTimeout(() => {
-                  window.location.reload();
-                }, 2500);
-              });
-            }
-          }, 1500);
-
+          // Si se está gritando, incrementar los segundos de grito
           if (isScreaming) {
-            if (intensity < maxIntensity - 0.5) {
-              close();
-            }
+            screamSeconds++;
           }
         }
 
-        lastIntensity = intensity;
-
-        // Llamar a processAudio aproximadamente cada 1/60 segundos
         if (isScreaming) {
-          timer = setTimeout(processAudio, 1000 / 1);
+          if (intensity < maxIntensity - 0.5) {
+            close();
+          }
         }
 
+        // Si no se detecta un grito, mostrar el botón de recarga
         if (!isScreaming) {
-          // mostramos el boton
-          btnReload.classList.remove('d-none')
-          btnReload.classList.add('d-block')
+          btnReload.classList.remove('d-none');
+          btnReload.classList.add('d-block');
+        }
+
+        // Reiniciar el temporizador para procesar el audio
+        if (isScreaming) {
+          clearTimeout(timer);
+          timer = setTimeout(processAudio, 1000 / 1);
         }
       }
 
@@ -160,6 +186,7 @@ function startAudioCapture() {
       console.error("Error al acceder al micrófono:", err);
     });
 }
+
 
 // Function to update a single digit
 function updateDigit(digit, value) {
