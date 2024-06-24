@@ -419,7 +419,7 @@
   bottom: 0rem;
   left: 0;
   width: 40%;
-  animation: moveDiagonalReverse 45s linear infinite;
+  animation: moveDiagonalReverse 30s linear infinite;
 }
 
 @keyframes moveDiagonalReverse {
