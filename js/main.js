@@ -26,6 +26,7 @@ const gameTerminatedText = document.getElementById('titleGameTerminated');
 const cardTerminatedGame = document.getElementById('cardPointsTerminated')
 
 const overlay = document.getElementById('overlay');
+const bodyElement = document.querySelector('[name="body"]');
 const countdownElement = overlay.querySelector('.countdown');
 
 
@@ -214,11 +215,6 @@ $(document).ready(function () {
 });
 
 
-
-btnReload.addEventListener('click', () => {
-  window.location.reload();
-})
-
 startScream.addEventListener('click', () => {
   if (hasclicked === true) {
     return;
@@ -279,4 +275,17 @@ function close() {
   cardTerminatedGame.classList.remove('d-none');
   cardTerminatedGame.classList.add('d-block')
   console.log('Fin del grito de gol detectado');
+
+  bodyElement.id = 'reload'
+
+  if (bodyElement.id === 'reload') {
+    bodyElement.addEventListener('click', () => {
+      window.location.reload();
+    })
+  }
 }
+
+
+btnReload.addEventListener('click', () => {
+  window.location.reload();
+})
