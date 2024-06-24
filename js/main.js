@@ -124,32 +124,32 @@ function startAudioCapture() {
             }
           } else {
             // Si no se detecta un grito, iniciar el temporizador de silencio
-            setTimeout(() => {
-              if (maxIntensity === 0) {
-                close();
+            // setTimeout(() => {
+            //   if (maxIntensity === 0) {
+            //     close();
   
-                console.log("en medio del if", maxIntensity);
+            //     console.log("en medio del if", maxIntensity);
   
-                // Mostrar el toast
-                Swal.fire({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'error',
-                  title: 'no gritaste, termino el juego',
-                  customClass: {
-                    title: "text-center"
-                  },
-                  showConfirmButton: false, // Mostrar el botón de confirmación
-                  timer: 2500,
-                  timerProgressBar: true,
-                }).then(() => {
-                  // Después de que el toast desaparezca, recargar la página
-                  setTimeout(() => {
-                    window.location.reload();
-                  }, 2500);
-                });
-              }
-            }, 1500);
+            //     // Mostrar el toast
+            //     Swal.fire({
+            //       toast: true,
+            //       position: 'top-end',
+            //       icon: 'error',
+            //       title: 'no gritaste, termino el juego',
+            //       customClass: {
+            //         title: "text-center"
+            //       },
+            //       showConfirmButton: false, // Mostrar el botón de confirmación
+            //       timer: 2500,
+            //       timerProgressBar: true,
+            //     }).then(() => {
+            //       // Después de que el toast desaparezca, recargar la página
+            //       setTimeout(() => {
+            //         window.location.reload();
+            //       }, 2500);
+            //     });
+            //   }
+            // }, 1500);
 
 
           }

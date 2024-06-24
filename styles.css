@@ -409,10 +409,8 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 100vw;
-  /* Ancho de la ventana */
+  width: 170vw;
   height: 100vh;
-  /* Altura de la ventana */
   overflow: hidden;
 }
 
