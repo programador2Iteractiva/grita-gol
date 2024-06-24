@@ -133,7 +133,7 @@ function startAudioCapture() {
           }, 1500);
 
           if (isScreaming) {
-            if (intensity < maxIntensity - 3) {
+            if (intensity < maxIntensity - 0.5) {
               close();
             }
           }
