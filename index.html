@@ -14,7 +14,7 @@
 </head>
 
 <body class="overflow-hidden" name="body" id="startingScream">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 999;">
+  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 999;">
     <div class="container-fluid mx-5">
       <h3 class="navbar-brand p-2 text-danger fw-bold fs-4">
         <strong>¡Bienvenidos!</strong>
@@ -23,7 +23,7 @@
         <img src="assets/Logos-color-avianca.png" class="ms-2" alt="Imagen al final" style="position: sticky;">
       </div>
     </div>
-  </nav>
+  </nav> -->
 
   <!-- main button -->
   <div class="external-container-inicio" style="position: relative; top: -230px; z-index: 1;">
@@ -31,19 +31,29 @@
       <img src="assets/Avion.png" class="moving-image" id="avion" alt="logo" />
     </div>
 
-    <div class="position-relative">
+    <!-- SECCIÓN 1: Inicio -->
+    <section id="introSection" style="display: block;">
+      <div class="container mt-5 text-center">
+        <h2>¡Bienvenido a Grita Gol!</h2>
+        <p>Esta es la sección inicial. Haz clic en el botón para comenzar.</p>
+        <button class="btn btn-primary" id="startGameBtn">Comenzar Juego</button>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: Iniciar Grito -->
+    <div class="position-relative" id="gameSection" style="display: none;">
       <!-- component starting game  -->
       <div class="d-flex flex-column align-items-center" id="gameStart">
         <div class="triangle-text text-center text-white mb-4">
-          <p class="h5 fs-3 fw-bold">¡Que comience el juego!</p>
-          <p class="h5 fs-3 fw-bold">y que los mejores pulmones ganen!</p>
+          <p class="h5 fs-3 fw-bold">Alista tus pulmones y garganta</p>
+          <p class="h5 fs-3 fw-bold">para gritar el gol</p>
         </div>
 
         <div class="d-flex justify-content-center align-items-center position-relative" id="imgonda"
           style="height: 200px">
           <!-- onda queda detras imagen principal -->
           <img src="assets/Onda.png" alt="Imagen de fondo" class="position-absolute img-fluid-mic"
-            style="top: 45%; left: 50%; transform: translate(-50%, -50%); max-width: 40%""
+            style="top: 45%; left: 50%; transform: translate(-50%, -50%); max-width: 40%"
                   />
 
                   <!-- imagen que quedara adelante -->
@@ -284,20 +294,37 @@
           </div>
         </div>
 
-        <button class="btn-back d-none" id="reload">Volver</button>
       </div>
-
     </div>
 
-    <!-- footer -->
-    <footer class="col-12 mt-auto" style="position: absolute; bottom: 0; right: 0; z-index: 10;">
-      <div class="d-flex justify-content-end align-items-end text-white mb-2">
-        <div class="text-end mx-3 mb-3 ml-1">
-          <img src="assets/Logo-Footer-inicio.png" style="width: 25%; margin-right: 20px; margin-bottom: 9rem;"
-            alt="logo" />
-        </div>
+    <!-- SECCIÓN 3: Imagen según puntaje -->
+    <section id="finalImageSection"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background-color: white;">
+      <img id="finalImageFull" src="" alt="Imagen final" style="width: 100%; height: 100%; object-fit: cover;">
+    </section>
+
+
+    <!-- SECCIÓN 4: SECCIÓN FINAL (Diseño "Gracias por participar") -->
+    <section id="finalImageSectionWithButton"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background-color: black;">
+
+      <img id="lastImage" src="" alt="Imagen final" style="width: 100%; height: 100%; object-fit: cover;">
+
+      <!-- Botón para volver -->
+      <button class="btn-back d-none" id="reload" style="position: absolute; bottom: 20px; right: 20px;">Volver</button>
+    </section>
+
+  </div>
+
+  <!-- footer -->
+  <footer class="col-12 mt-auto" style="position: absolute; bottom: 0; right: 0; z-index: 10;">
+    <div class="d-flex justify-content-end align-items-end text-white mb-2">
+      <div class="text-end mx-3 mb-3 ml-1">
+        <img src="assets/Logo-Footer-inicio.png" style="width: 25%; margin-right: 20px; margin-bottom: 9rem;"
+          alt="logo" />
       </div>
-    </footer>
+    </div>
+  </footer>
   </div>
 
   <script src="js/main.js" type="module"></script>
