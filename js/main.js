@@ -293,7 +293,7 @@ function close() {
   const imageCount = 5; // Número de imágenes disponibles
   const imageRanges = maxScore / imageCount; // Definimos el rango de cada imagen
 
-  const lastImage = 'assets/Medellin.png';
+  const lastImage = 'assets/Fondo.png';
 
   // Array de rutas de imágenes
   const images = [
@@ -306,9 +306,14 @@ function close() {
 
   // Función para determinar la imagen según el puntaje del usuario
   function getImageForScore(score) {
+
+    console.log(score);
+
     const index = Math.min(Math.floor(score / imageRanges), imageCount - 1);
 
-    if(currentScore >= score){
+    console.log('index', index)
+
+    if(score >= maxScore){
       console.log('Entro', images.length - 1)
       console.log(images[images.length - 1]);
       return images[images.length - 1];
