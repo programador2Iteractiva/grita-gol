@@ -32,6 +32,7 @@ const countdownElement = overlay.querySelector('.countdown');
 const introSection = document.getElementById('introSection');
 const gameSection = document.getElementById('gameSection');
 const startGameBtn = document.getElementById('startGameBtn');
+const footerImage = document.getElementById('footerImage')
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -231,7 +232,9 @@ $(document).ready(function () {
 });
 
 
-startScream.addEventListener('click', () => {
+startScream.addEventListener('click', (event) => {
+  event.stopPropagation();
+  event.preventDefault();
   console.log("Click en startingScream");
   if (hasclicked === true) {
     return;
@@ -345,6 +348,7 @@ function close() {
     console.log("Mostrando la imagen final a pantalla completa");
     cardTerminatedGame.classList.add('d-none');
     cardTerminatedGame.classList.remove('d-block');
+    document.getElementById('footerImage').style.display = 'none';
     document.getElementById('finalImageSection').style.display = 'block';
   }, 4000); // 10 segundos
 
@@ -355,6 +359,7 @@ function close() {
     document.getElementById('finalImageSection').style.display = 'none';
     // Mostramos la sección que contiene la imagen y el botón
     document.getElementById('finalImageSectionWithButton').style.display = 'block';
+    document.getElementById('footerImage').style.display = 'block';
 
     // Mostramos el botón de reinicio
     btnReload.classList.remove('d-none');
