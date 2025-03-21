@@ -32,7 +32,6 @@ const countdownElement = overlay.querySelector('.countdown');
 const introSection = document.getElementById('introSection');
 const gameSection = document.getElementById('gameSection');
 const startGameBtn = document.getElementById('startGameBtn');
-const startingScream = document.getElementById('startingScream');
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -45,11 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })
 
-startingScream.addEventListener('click', () => {
-  // Ocultamos la sección inicial
-  introSection.style.display = 'none';
-  // Mostramos la sección del juego
-  gameSection.style.display = 'block';
+startGameBtn.addEventListener('click', (event) => {
+  event.stopPropagation(); // Evita que el evento se propague
+  // Opcional: prevenir acción por defecto
+  event.preventDefault();
+
+  // Agrega un retardo pequeño para cambiar de sección
+  setTimeout(() => {
+    introSection.style.display = 'none';
+    gameSection.style.display = 'block';
+  }, 50);
 });
 
 // Function to start audio capture
@@ -165,7 +169,7 @@ function startAudioCapture() {
         if (!isScreaming) {
           // mostramos el boton
           btnReload.classList.remove('d-none')
-          btnReload.classList.add('d-block');
+          // btnReload.classList.add('d-block');
 
           close()
         }
@@ -228,10 +232,10 @@ $(document).ready(function () {
 
 
 startScream.addEventListener('click', () => {
+  console.log("Click en startingScream");
   if (hasclicked === true) {
     return;
   }
-
 
   hasclicked = true;
 
@@ -261,6 +265,7 @@ startScream.addEventListener('click', () => {
       }, 1000);
     }
   }, 1000);
+
 })
 
 function close() {
@@ -286,6 +291,8 @@ function close() {
   // mostramos tu puntaje
   cardTerminatedGame.classList.remove('d-none');
   cardTerminatedGame.classList.add('d-block')
+  // document.querySelector('.title-puntaje').textContent = 'Has logrado ' + currentScore + ' decibeles';
+  document.querySelector('.title-puntaje').textContent = 'Has logrado decibeles';
   console.log('Fin del grito de gol detectado');
 
   // >>> Lógica adicional para determinar la imagen final según el score <<<
@@ -313,11 +320,11 @@ function close() {
 
     console.log('index', index)
 
-    if(score >= maxScore){
+    if (score >= maxScore) {
       console.log('Entro', images.length - 1)
       console.log(images[images.length - 1]);
       return images[images.length - 1];
-    }else{
+    } else {
       return images[index];
     }
 
@@ -351,7 +358,7 @@ function close() {
 
     // Mostramos el botón de reinicio
     btnReload.classList.remove('d-none');
-    btnReload.classList.add('d-block');
+    // btnReload.classList.add('d-block');
 
     document.getElementById('lastImage').src = lastImage;
   }, 10000);// 20 segundos

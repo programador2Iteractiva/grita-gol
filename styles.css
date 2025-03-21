@@ -1,5 +1,189 @@
 /* Include Code  */
 
+/* RedHatDisplay-Black */
+@font-face {
+  font-family: 'RedHatDisplayBlack';
+  src: url('./fonts/RedHatDisplay-Black.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-BlackItalic */
+@font-face {
+  font-family: 'RedHatDisplayBlackItalic';
+  src: url('./fonts/RedHatDisplay-BlackItalic.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-Bold */
+@font-face {
+  font-family: 'RedHatDisplayBold';
+  src: url('./fonts/RedHatDisplay-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-BoldItalic */
+@font-face {
+  font-family: 'RedHatDisplayBoldItalic';
+  src: url('./fonts/RedHatDisplay-BoldItalic.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-ExtraBold */
+@font-face {
+  font-family: 'RedHatDisplayExtraBold';
+  src: url('./fonts/RedHatDisplay-ExtraBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-ExtraBoldItalic */
+@font-face {
+  font-family: 'RedHatDisplayExtraBoldItalic';
+  src: url('./fonts/RedHatDisplay-ExtraBoldItalic.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-Italic */
+@font-face {
+  font-family: 'RedHatDisplayItalic';
+  src: url('./fonts/RedHatDisplay-Italic.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-Light */
+@font-face {
+  font-family: 'RedHatDisplayLight';
+  src: url('./assets/fonts/RedHatDisplay-Light.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-LightItalic */
+@font-face {
+  font-family: 'RedHatDisplayLightItalic';
+  src: url('./fonts/RedHatDisplay-LightItalic.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-Medium */
+@font-face {
+  font-family: 'RedHatDisplayMedium';
+  src: url('./fonts/RedHatDisplay-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-MediumItalic */
+@font-face {
+  font-family: 'RedHatDisplayMediumItalic';
+  src: url('./fonts/RedHatDisplay-MediumItalic.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-Regular */
+@font-face {
+  font-family: 'RedHatDisplayRegular';
+  src: url('./fonts/RedHatDisplay-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-SemiBold */
+@font-face {
+  font-family: 'RedHatDisplaySemiBold';
+  src: url('./fonts/RedHatDisplay-SemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* RedHatDisplay-SemiBoldItalic */
+@font-face {
+  font-family: 'RedHatDisplaySemiBoldItalic';
+  src: url('./fonts/RedHatDisplay-SemiBoldItalic.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+/* Clases CSS para cada fuente importada */
+
+/* Clase para RedHatDisplayBlack */
+.RedHatDisplayBlack {
+  font-family: 'RedHatDisplayBlack';
+}
+
+/* Clase para RedHatDisplayBlackItalic */
+.RedHatDisplayBlackItalic {
+  font-family: 'RedHatDisplayBlackItalic';
+}
+
+/* Clase para RedHatDisplayBold */
+.RedHatDisplayBold {
+  font-family: 'RedHatDisplayBold';
+}
+
+/* Clase para RedHatDisplayBoldItalic */
+.RedHatDisplayBoldItalic {
+  font-family: 'RedHatDisplayBoldItalic';
+}
+
+/* Clase para RedHatDisplayExtraBold */
+.RedHatDisplayExtraBold {
+  font-family: 'RedHatDisplayExtraBold';
+}
+
+/* Clase para RedHatDisplayExtraBoldItalic */
+.RedHatDisplayExtraBoldItalic {
+  font-family: 'RedHatDisplayExtraBoldItalic';
+}
+
+/* Clase para RedHatDisplayItalic */
+.RedHatDisplayItalic {
+  font-family: 'RedHatDisplayItalic';
+}
+
+/* Clase para RedHatDisplayLight */
+.RedHatDisplayLight {
+  font-family: 'RedHatDisplayLight';
+}
+
+/* Clase para RedHatDisplayLightItalic */
+.RedHatDisplayLightItalic {
+  font-family: 'RedHatDisplayLightItalic';
+}
+
+/* Clase para RedHatDisplayMedium */
+.RedHatDisplayMedium {
+  font-family: 'RedHatDisplayMedium';
+}
+
+/* Clase para RedHatDisplayMediumItalic */
+.RedHatDisplayMediumItalic {
+  font-family: 'RedHatDisplayMediumItalic';
+}
+
+/* Clase para RedHatDisplayRegular */
+.RedHatDisplayRegular {
+  font-family: 'RedHatDisplayRegular';
+}
+
+/* Clase para RedHatDisplaySemiBold */
+.RedHatDisplaySemiBold {
+  font-family: 'RedHatDisplaySemiBold';
+}
+
+/* Clase para RedHatDisplaySemiBoldItalic */
+.RedHatDisplaySemiBoldItalic {
+  font-family: 'RedHatDisplaySemiBoldItalic';
+}
+
 .navbar-brand img {
   height: 5.5rem;
   width: auto;
@@ -213,7 +397,7 @@
 .external-container-inicio {
   width: 100%;
   height: 135vh;
-  background-image: url(../../assets/sky-bg.png) !important;
+  background-image: url(../../assets/Fondo.png) !important;
   /* Make sure the path to your image is correct */
   background-repeat: no-repeat;
   background-size: cover;
@@ -234,7 +418,12 @@
 }
 
 .img-fluid-mic {
-  max-width: 20%;
+  max-width: 30%;
+  height: auto;
+}
+
+.img-fluid-other-mic {
+  max-width: 15%;
   height: auto;
 }
 
@@ -326,7 +515,7 @@
 
 #counter {
   padding-top: 0px;
-  margin-top: 40px;
+  /* margin-top: 40px; */
   font-size: 128px;
   height: 100px;
   line-height: 1em;
@@ -433,17 +622,15 @@
 }
 
 .custom-puntaje {
- position: absolute;
-    bottom: 135px;
-    background: linear-gradient(to bottom, #ffdd33, #ffa800);
+    bottom: 100px;
+    background: linear-gradient(to bottom, #6ed4e1, #6ed4e1);
     border: none;
-    border-radius: 50px;
-    color: #693300;
-    padding: 20px 0px;
+    color: red;
+    padding: 6px 18px;
     font-size: 30px !important;
     font-weight: bold;
     /* cursor: pointer; */
-    box-shadow: 0 12px #e68e0a;
+    box-shadow: 0 12px #6ed4e1;
     /* transition: all 0.2s ease; */
     margin-right: 0px;
 }
@@ -456,7 +643,6 @@
 }
 
 .title-puntaje {
-  color: white;
   font-weight: bold;
   font-size: -webkit-xxx-large;
   margin-top: 0px;
@@ -482,4 +668,68 @@
   box-shadow: 0 7px #e68e0a;
   transition: all 0.2s ease;
   margin-right: 7px;
+}
+
+
+
+
+
+
+.btn-startGame {
+  margin-top: 2rem;
+  background: linear-gradient(to bottom, #6ed4e1, #6ed4e1);
+  border: none;
+  border-radius: 40px;
+  color: red;
+  padding: 5px 40px;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 7px;
+}
+
+.btn-startGame:hover {
+  background: linear-gradient(to bottom, red, red);
+  color: #6ed4e1;
+  border: 1px solid white;
+}
+
+.second-custom-button-gol{
+  margin-top: 2rem;
+  background: linear-gradient(to bottom, #6ed4e1, #6ed4e1);
+  border: none;
+  border-radius: 40px;
+  color: red;
+  padding: 5px 40px;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 7px;
+}
+
+.second-custom-button-gol:hover {
+  background: linear-gradient(to bottom, red, red);
+  color: #6ed4e1;
+  border: 1px solid white;
+}
+
+.btn-thanks {
+  margin-top: 2rem;
+  background: linear-gradient(to bottom, red, red);
+  border: none;
+  border-radius: 40px;
+  color: white;
+  padding: 5px 40px;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 7px;
+  border: white;
+}
+
+.text-thanks-end{
+  font-size: 40px;
 }

@@ -33,10 +33,18 @@
 
     <!-- SECCIÓN 1: Inicio -->
     <section id="introSection" style="display: block;">
-      <div class="container mt-5 text-center">
-        <h2>¡Bienvenido a Grita Gol!</h2>
-        <p>Esta es la sección inicial. Haz clic en el botón para comenzar.</p>
-        <button class="btn btn-primary" id="startGameBtn">Comenzar Juego</button>
+      <div class="d-flex justify-content-center align-items-center position-relative" id="imgonda"
+        style="height: 100px">
+        <!-- imagen que quedara adelante -->
+        <img src=" assets/Microfono.png" alt="Imagen centrada" class="img-fluid-other-mic" style=" z-index: 0" />
+      </div>
+      <div class="container mt-4 text-center">
+        <h1 class="text-white">¡Bienvenido!</h1>
+        <h2 class="text-white" style="font-weight: 100;">Con <span style="font-weight: bold;">avianca</span> llegas a
+          <span style="color: #6ed4e1;">más de <span style="font-weight: bold;"> 80 destinos</span></span>, <br>
+          descubre con tu grito de gol a cuál puedes llegar.
+        </h2>
+        <button class="btn-startGame" id="startGameBtn">Prepárate para jugar</button>
       </div>
     </section>
 
@@ -44,23 +52,17 @@
     <div class="position-relative" id="gameSection" style="display: none;">
       <!-- component starting game  -->
       <div class="d-flex flex-column align-items-center" id="gameStart">
-        <div class="triangle-text text-center text-white mb-4">
-          <p class="h5 fs-3 fw-bold">Alista tus pulmones y garganta</p>
-          <p class="h5 fs-3 fw-bold">para gritar el gol</p>
+        <div class="triangle-text text-center text-white">
+          <h1 style="font-weight: 100;">Alista tus pulmones y garganta</h1>
+          <h1 style="font-weight: 100;">para gritar el gol</h1>
         </div>
 
         <div class="d-flex justify-content-center align-items-center position-relative" id="imgonda"
           style="height: 200px">
-          <!-- onda queda detras imagen principal -->
-          <img src="assets/Onda.png" alt="Imagen de fondo" class="position-absolute img-fluid-mic"
-            style="top: 45%; left: 50%; transform: translate(-50%, -50%); max-width: 40%"
-                  />
-
-                  <!-- imagen que quedara adelante -->
-                  <img
-                    src=" assets/Mic+Circle-2.png" alt="Imagen centrada" class="img-fluid-mic" style=" z-index: 0" />
+          <!-- imagen que quedara adelante -->
+          <img src="assets/MicrofonoOnda.png" alt="Imagen centrada" class="img-fluid-mic" style=" z-index: 0" />
         </div>
-        <button class="custom-button-gol" id="startingScream">¡Grita gol!</button>
+        <button class="second-custom-button-gol" id="startingScream">¡Grita gol!</button>
       </div>
 
       <!-- Overlay -->
@@ -75,27 +77,18 @@
 
       <div class="d-flex flex-column align-items-center" id="counterScore" style="display: none!important">
         <div class="triangle-text text-center text-white mb-4 d-none" id="titleGameTerminated">
-          <p class="h5 fs-3 fw-bold">¡Tus puntos están listos!</p>
+          <h1 class="text-white">¡Excelente grito!</h1>
         </div>
 
         <!-- colocamos la card que tendra la puntuacion -->
-        <div class="card shadow shadow-lg w-120 d-block" id="adviserScream">
-          <div class="card-title text-center p-2 mt-3 mb-3">
-            <h4 class="title-score">¡Excelente grito!</h4>
-            <p class="d-title-score text-center">Estamos cargando tus puntos</p>
+        <div class="w-120 d-block" id="adviserScream">
+          <div class="text-center p-2 mt-3 mb-3">
+            <h1 class="text-white">Calculando puntaje</h1>
           </div>
         </div>
 
 
         <!-- aparecemos la card que tendra el texto -->
-
-        <div class="custom-puntaje card shadow shadow-lg custom-with d-none" id="cardPointsTerminated">
-          <div class="card-title text-center mt-3 mb-3">
-            <h4 class="title-puntaje">Tu puntaje:</h4>
-          </div>
-        </div>
-
-
         <div class="card p-3">
           <div id="counter">
             <div class="digit">
@@ -294,6 +287,12 @@
           </div>
         </div>
 
+        <div class="custom-puntaje card shadow shadow-lg custom-with d-none mt-5" id="cardPointsTerminated">
+          <div class="card-title text-center mt-3 mb-3">
+            <h4 class="title-puntaje"></h4>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -305,23 +304,83 @@
 
 
     <!-- SECCIÓN 4: SECCIÓN FINAL (Diseño "Gracias por participar") -->
-    <section id="finalImageSectionWithButton"
+    <!-- <section id="finalImageSectionWithButton"
       style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; background-color: black;">
 
       <img id="lastImage" src="" alt="Imagen final" style="width: 100%; height: 100%; object-fit: cover;">
+      <button class="btn-back d-none" id="reload" style="position: absolute; bottom: 20px; right: 20px;">Volver</button>
+      
+    </section> -->
+
+    <section id="finalImageSectionWithButton"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;">
+
+      <!-- Imagen de fondo a pantalla completa -->
+      <img id="lastImage" src="" alt="Imagen final" style="
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         position: absolute;
+         top: 0;
+         left: 0;
+         z-index: -1;
+       ">
+
+      <!-- Contenedor para el contenido -->
+      <div class="container text-center py-5 mt-5" style="position: relative; z-index: 1; color: #fff;">
+        <!-- Título principal -->
+
+        <div class="w-100 d-flex justify-content-center align-items-center mt-5">
+          <h1 class="mb-4 fw-bold text-white btn-thanks w-50">¡Gracias por participar!</h1>
+        </div>
+
+        <!-- Subtítulo -->
+        <h1 class="lead mb-5 text-white text-center text-thanks-end">
+          Y recuerda, <strong>avianca</strong> te ofrece
+        </h1>
+
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-3 mb-4">
+            <div class="d-flex justify-content-center align-items-center">
+              <h3 class="display-6 fw-bold">+ 150 <br>
+                rutas
+              </h3>
+              <img src="assets/Avion-Icono.png" alt="150 rutas" class="mb-3" style="max-width: 80px;" />
+            </div>
+          </div>
+          <div class="col-12 col-md-3 mb-4">
+            <div class="d-flex justify-content-center align-items-center">
+              <h3 class="display-6 fw-bold">+ 25 <br>
+                países
+              </h3>
+              <img src="assets/Banderas-Icono.png" alt="25 países" class="mb-3" style="max-width: 80px;" />
+            </div>
+          </div>
+          <div class="col-12 col-md-3 mb-4">
+            <div class="d-flex justify-content-center align-items-center">
+              <h3 class="display-6 fw-bold">+ 80 <br>
+                destinos
+              </h3>
+              <img src="assets/Planeta-Icono.png" alt="80 destinos" class="mb-3" style="max-width: 80px;" />
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Botón para volver -->
-      <button class="btn-back d-none" id="reload" style="position: absolute; bottom: 20px; right: 20px;">Volver</button>
+      <button class="btn-back d-none" id="reload" style="display: none; position: absolute; bottom: 20px; right: 20px; z-index: 2;">
+        Volver
+      </button>
     </section>
+
 
   </div>
 
   <!-- footer -->
   <footer class="col-12 mt-auto" style="position: absolute; bottom: 0; right: 0; z-index: 10;">
     <div class="d-flex justify-content-end align-items-end text-white mb-2">
-      <div class="text-end mx-3 mb-3 ml-1">
-        <img src="assets/Logo-Footer-inicio.png" style="width: 25%; margin-right: 20px; margin-bottom: 9rem;"
-          alt="logo" />
+      <div class="text-center mx-3 mb-3 ml-1 w-100">
+        <img src="assets/Logo-Avianca-Colombia.png" style="width: 25%; margin-bottom: 4rem;" alt="logo" />
       </div>
     </div>
   </footer>
