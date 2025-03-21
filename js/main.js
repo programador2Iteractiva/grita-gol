@@ -29,6 +29,11 @@ const overlay = document.getElementById('overlay');
 const bodyElement = document.querySelector('[name="body"]');
 const countdownElement = overlay.querySelector('.countdown');
 
+const introSection = document.getElementById('introSection');
+const gameSection = document.getElementById('gameSection');
+const startGameBtn = document.getElementById('startGameBtn');
+const startingScream = document.getElementById('startingScream');
+
 
 document.addEventListener('DOMContentLoaded', () => {
   navigator.mediaDevices
@@ -39,6 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Permiso denegado o hubo un error: ', error);
     });
 })
+
+startingScream.addEventListener('click', () => {
+  // Ocultamos la sección inicial
+  introSection.style.display = 'none';
+  // Mostramos la sección del juego
+  gameSection.style.display = 'block';
+});
 
 // Function to start audio capture
 function startAudioCapture() {
@@ -86,7 +98,7 @@ function startAudioCapture() {
         percentage = Math.min(percentage, 100);
 
         // Calcular el nuevo score y multiplicarlo por 100
-        let newScore = Math.round(percentage * 25) ;
+        let newScore = Math.round(percentage * 25);
 
         // Actualizar currentScore solo si newScore es mayor
         if (newScore > currentScore) {
@@ -135,7 +147,7 @@ function startAudioCapture() {
 
           if (isScreaming) {
             // sumamos 1 al score 
-            currentScore+=1;
+            currentScore += 1;
 
             if (intensity < maxIntensity - 3) {
               close();
@@ -275,6 +287,70 @@ function close() {
   cardTerminatedGame.classList.remove('d-none');
   cardTerminatedGame.classList.add('d-block')
   console.log('Fin del grito de gol detectado');
+
+  // >>> Lógica adicional para determinar la imagen final según el score <<<
+  const maxScore = 1400; // Puntaje máximo alcanzable
+  const imageCount = 5; // Número de imágenes disponibles
+  const imageRanges = maxScore / imageCount; // Definimos el rango de cada imagen
+
+  const lastImage = 'assets/Medellin.png';
+
+  // Array de rutas de imágenes
+  const images = [
+    'assets/Medellin.png',  // 0 - 280
+    'assets/Cordoba.png', // 280 - 560
+    'assets/Cancun.png', // 560 - 840
+    'assets/Tampa.png', // 840 - 1120
+    'assets/Madrid.png'// 1120
+  ];
+
+  // Función para determinar la imagen según el puntaje del usuario
+  function getImageForScore(score) {
+    const index = Math.min(Math.floor(score / imageRanges), imageCount - 1);
+
+    if(currentScore >= score){
+      console.log('Entro', images.length - 1)
+      console.log(images[images.length - 1]);
+      return images[images.length - 1];
+    }else{
+      return images[index];
+    }
+
+  }
+
+  // Obtener la imagen correspondiente al puntaje final
+  const finalImagePath = getImageForScore(currentScore);
+
+  // Actualizamos el src del elemento que usaremos para la imagen a pantalla completa
+  document.getElementById('finalImageFull').src = finalImagePath;
+  // Nota: Si el elemento 'finalImage' no existe, no lo actualizamos.
+  // >>> Fin de la lógica adicional <<<
+
+  // Nueva lógica para mostrar la imagen de fondo y el botón con delays
+
+  // 1. Después de 10 segundos se oculta la card de puntos y se muestra la sección de imagen final
+  setTimeout(() => {
+    console.log("Mostrando la imagen final a pantalla completa");
+    cardTerminatedGame.classList.add('d-none');
+    cardTerminatedGame.classList.remove('d-block');
+    document.getElementById('finalImageSection').style.display = 'block';
+  }, 4000); // 10 segundos
+
+  // 2. Después de 20 segundos en total (10 segundos más) se oculta la sección anterior y se muestra la sección con imagen y botón
+  setTimeout(() => {
+    console.log("Mostrando la sección de imagen final con botón");
+    // Ocultamos la sección sin botón
+    document.getElementById('finalImageSection').style.display = 'none';
+    // Mostramos la sección que contiene la imagen y el botón
+    document.getElementById('finalImageSectionWithButton').style.display = 'block';
+
+    // Mostramos el botón de reinicio
+    btnReload.classList.remove('d-none');
+    btnReload.classList.add('d-block');
+
+    document.getElementById('lastImage').src = lastImage;
+  }, 10000);// 20 segundos
+
 
   bodyElement.id = 'reload'
 
