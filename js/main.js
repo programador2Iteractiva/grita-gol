@@ -270,7 +270,7 @@ function close() {
   console.log('Fin del grito de gol detectado');
 
   // >>> Lógica adicional para determinar la imagen final según el score <<<
-  const maxScore = 1400; // Puntaje máximo alcanzable
+  const maxScore = 4000; // Puntaje máximo alcanzable
   const imageCount = 5; // Número de imágenes disponibles
   const imageRanges = maxScore / imageCount; // Definimos el rango de cada imagen
 
@@ -278,11 +278,11 @@ function close() {
 
   // Array de rutas de imágenes
   const images = [
-    'assets/Medellin.png',  // 0 - 280
-    'assets/Cordoba.png', // 280 - 560
-    'assets/Cancun.png', // 560 - 840
-    'assets/Tampa.png', // 840 - 1120
-    'assets/Madrid.png'// 1120
+    'assets/Medellin.png',  // 0 - 800
+    'assets/Cordoba.png', // 800 - 1600
+    'assets/Cancun.png', // 1600 - 2400
+    'assets/Tampa.png', // 2400 - 3200
+    'assets/Madrid.png'// 3200 - 4000
   ];
 
   if (animationId) {
