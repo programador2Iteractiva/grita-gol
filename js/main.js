@@ -9,6 +9,8 @@ let timer; // Variable para el temporizador
 const isclosed = false;
 let timerSwallClose = 0;
 var digitHeight = $('.digit div').height();
+let animationId = null;
+let interval;
 
 const intensityThreshold = 15;
 const silenceThreshold = -40;
@@ -87,94 +89,44 @@ function startAudioCapture() {
       function processAudio() {
         analyser.getByteFrequencyData(dataArray);
 
-        let sum = dataArray.reduce((acc, val) => acc + val, 0);
-        let average = sum / bufferLength;
+        const sum = dataArray.reduce((acc, val) => acc + val, 0);
+        const average = sum / bufferLength;
+        const intensity = 20 * Math.log10(average) + 20;
 
-        let intensity = 20 * Math.log10(average) + 20;
-        intensity = Math.max(intensity, 0);
+        // Score basado en intensidad
+        const percentage = average / 256;
+        const baseScore = Math.round(percentage * 25);
 
-        if (intensity > maxIntensity) {
-          maxIntensity = intensity;
+        const screamThreshold = 30; // define tu propio umbral
+
+        // Si supera el umbral, empieza el grito
+        if (intensity > screamThreshold && !isScreaming) {
+          isScreaming = true;
         }
 
-        console.info("max: ", maxIntensity, " intensity: ", intensity);
-
-        let percentage = (average / 255) * 100;
-        percentage = Math.min(percentage, 100);
-
-        // Calcular el nuevo score y multiplicarlo por 100
-        let newScore = Math.round(percentage * 25);
-
-        // Actualizar currentScore solo si newScore es mayor
-        if (newScore > currentScore) {
-          currentScore = newScore;
-          updateCounter(currentScore); // Update the counter when the score changes
-        }
-
-        // Mostrar el score actualizado
-        console.log("Score:", currentScore);
-
-        if (isMeasuring) {
-          console.log("entro a measuri")
-          if (intensity <= maxIntensity && !isScreaming) {
-            // Grito de gol detectado
-            isScreaming = true;
-            console.log(isScreaming)
-            console.log('Grito de gol detectado');
-          }
-
-          setTimeout(() => {
-            if (maxIntensity === 0) {
-              close();
-
-              console.log("en medio del if", maxIntensity);
-
-              // Mostrar el toast
-              Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: 'no gritaste, termino el juego',
-                customClass: {
-                  title: "text-center"
-                },
-                showConfirmButton: false, // Mostrar el botón de confirmación
-                timer: 2500,
-                timerProgressBar: true,
-              }).then(() => {
-                // Después de que el toast desaparezca, recargar la página
-                setTimeout(() => {
-                  window.location.reload();
-                }, 2500);
-              });
-            }
-          }, 1500);
-
-          if (isScreaming) {
-            // sumamos 1 al score 
-            currentScore += 1;
-
-            if (intensity < maxIntensity - 3) {
-              close();
-            }
-          }
-        }
-
-        lastIntensity = intensity;
-
-        // Llamar a processAudio aproximadamente cada 1/60 segundos
+        // Mientras se mantenga gritando
         if (isScreaming) {
-          timer = setTimeout(processAudio, 1000 / 1);
+          // Si bajó la intensidad, termina el grito
+          if (intensity < screamThreshold - 5) {
+            close();
+            return;
+          }
+
+          // Sumar score por duración del grito
+          currentScore += 2;
+          console.log("Puntaje actual:", Math.floor(currentScore));
+          updateCounter(currentScore);
+        } else {
+          // Aún no está gritando, pero actualizamos el score si la intensidad supera lo anterior
+          if (baseScore > currentScore) {
+            currentScore = baseScore;
+            updateCounter(currentScore);
+          }
         }
 
-        if (!isScreaming) {
-          // mostramos el boton
-          btnReload.classList.remove('d-none')
-          // btnReload.classList.add('d-block');
-
-          close()
-        }
+        animationId = requestAnimationFrame(processAudio);
       }
+
 
       // Iniciar el proceso de audio
       processAudio();
@@ -185,11 +137,30 @@ function startAudioCapture() {
 }
 
 // Function to update a single digit
+// function updateDigit(digit, value) {
+//   var digitHeight = $(digit).children('div').height(); // Adjust this to your digit height
+//   var translateY = -value * digitHeight;
+//   $(digit).children('div').css('transform', 'translateY(' + translateY + 'px)');
+// }
+
 function updateDigit(digit, value) {
+  // digit es el div con clase "digit"
+  var isLastDigit = $(digit).hasClass('last-digit');
+
   var digitHeight = $(digit).children('div').height(); // Adjust this to your digit height
   var translateY = -value * digitHeight;
-  $(digit).children('div').css('transform', 'translateY(' + translateY + 'px)');
+
+  // Aplicamos la animación: más lenta para el último dígito
+  if (isLastDigit) {
+    $(digit).children('div').css('transition', 'transform 1s ease-out');
+    $(digit).children('div').css('transform', 'translateY(' + translateY + 'px)');
+  } else {
+    $(digit).children('div').css('transition', 'transform 0s ease-out');
+    $(digit).children('div').css('transform', 'translateY(' + translateY + 'px)');
+  }
 }
+
+
 
 // Function to update the counter display
 function updateCounter(number) {
@@ -314,6 +285,11 @@ function close() {
     'assets/Madrid.png'// 1120
   ];
 
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+
   // Función para determinar la imagen según el puntaje del usuario
   function getImageForScore(score) {
 
@@ -367,7 +343,6 @@ function close() {
 
     document.getElementById('lastImage').src = lastImage;
   }, 10000);// 20 segundos
-
 
   bodyElement.id = 'reload'
 
