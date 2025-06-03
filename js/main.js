@@ -1,5 +1,9 @@
 // main.optimizado.js
 
+let intensityHistory = [];
+const smoothingWindow = 5; // últimos 5 frames
+
+
 let audioContext, analyser, microphone;
 let currentScore = 0;
 let isMeasuring = false;
@@ -43,8 +47,26 @@ const ui = {
 };
 
 function initMic() {
-  navigator.mediaDevices.getUserMedia({ audio: true }).catch(console.error);
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    console.warn("❌ Este navegador no soporta getUserMedia o no está disponible en contexto inseguro (usa HTTPS).");
+    return;
+  }
+
+  navigator.mediaDevices.getUserMedia({
+    audio: {
+      noiseSuppression: true,
+      echoCancellation: true,
+      autoGainControl: false,
+    }
+  })
+    .then(() => {
+      console.log("✅ Permiso para micrófono concedido.");
+    })
+    .catch(error => {
+      console.error("❌ Error al solicitar acceso al micrófono:", error);
+    });
 }
+
 
 function updateDigit(digitElement, value) {
   const container = digitElement.querySelector('.digit-inner');
@@ -108,14 +130,22 @@ function processAudio(bufferLength, dataArray) {
   const average = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
   const intensity = 20 * Math.log10(average) + 20;
 
-  if (intensity > intensityThreshold && !isScreaming) {
+  intensityHistory.push(intensity);
+  if (intensityHistory.length > smoothingWindow) {
+    intensityHistory.shift(); // eliminar el más antiguo
+  }
+  const smoothedIntensity = intensityHistory.reduce((a, b) => a + b, 0) / intensityHistory.length;
+
+  if (smoothedIntensity > intensityThreshold && !isScreaming) {
     isScreaming = true;
-    console.log(`🚀 Comenzó el grito: intensidad ${intensity.toFixed(2)} dB > umbral (${intensityThreshold} dB)`);
+    console.log(`🚀 Comenzó el grito: intensidad ${smoothedIntensity.toFixed(2)} dB > umbral (${intensityThreshold} dB)`);
   }
 
   if (isScreaming) {
-    if (intensity < intensityThreshold - 5) return closeGame();
-    console.log(`🎤 El grito terminó: intensidad actual ${intensity.toFixed(2)} dB < umbral mínimo (${intensityThreshold - 5} dB)`);
+    if (smoothedIntensity < intensityThreshold - 5) {
+      console.log(`🎤 El grito terminó: intensidad actual ${smoothedIntensity.toFixed(2)} dB < umbral mínimo (${intensityThreshold - 5} dB)`);
+      return closeGame();
+    }
     currentScore += 2;
   } else {
     const baseScore = Math.round((average / 256) * 25);
@@ -132,7 +162,13 @@ function startAudioCapture() {
     analyser = audioContext.createAnalyser();
   }
 
-  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+  navigator.mediaDevices.getUserMedia({
+    audio: {
+      noiseSuppression: true,
+      echoCancellation: true,
+      autoGainControl: false,
+    }
+  }).then(stream => {
     microphone = audioContext.createMediaStreamSource(stream);
     microphone.connect(analyser);
     analyser.fftSize = 2048;
