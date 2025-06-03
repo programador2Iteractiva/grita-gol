@@ -529,22 +529,28 @@
 }
 
 .digit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  background: #666;
+  overflow: hidden;
+  height: 90px; /* altura de un solo número */
   width: 69px;
-  height: 90px;
-  font-size: 70px;
-  margin: 5px;
   border-radius: 10px;
+  background: #666;
+  margin: 5px;
+  position: relative;
 }
 
-.digit div {
-  text-align: center;
-  transform: translateY(0);
-  transition: transform 1s ease-out;
+.digit-inner {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease-out;
+}
+
+.card-number {
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  color: white;
 }
 
 .mt-15 {
