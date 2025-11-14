@@ -2,112 +2,112 @@
 
 /* RedHatDisplay-Black */
 @font-face {
-  font-family: 'RedHatDisplayBlack';
-  src: url('./fonts/RedHatDisplay-Black.ttf') format('truetype');
+  font-family: "RedHatDisplayBlack";
+  src: url("./fonts/RedHatDisplay-Black.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-BlackItalic */
 @font-face {
-  font-family: 'RedHatDisplayBlackItalic';
-  src: url('./fonts/RedHatDisplay-BlackItalic.ttf') format('truetype');
+  font-family: "RedHatDisplayBlackItalic";
+  src: url("./fonts/RedHatDisplay-BlackItalic.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-Bold */
 @font-face {
-  font-family: 'RedHatDisplayBold';
-  src: url('./fonts/RedHatDisplay-Bold.ttf') format('truetype');
+  font-family: "RedHatDisplayBold";
+  src: url("./fonts/RedHatDisplay-Bold.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-BoldItalic */
 @font-face {
-  font-family: 'RedHatDisplayBoldItalic';
-  src: url('./fonts/RedHatDisplay-BoldItalic.ttf') format('truetype');
+  font-family: "RedHatDisplayBoldItalic";
+  src: url("./fonts/RedHatDisplay-BoldItalic.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-ExtraBold */
 @font-face {
-  font-family: 'RedHatDisplayExtraBold';
-  src: url('./fonts/RedHatDisplay-ExtraBold.ttf') format('truetype');
+  font-family: "RedHatDisplayExtraBold";
+  src: url("./fonts/RedHatDisplay-ExtraBold.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-ExtraBoldItalic */
 @font-face {
-  font-family: 'RedHatDisplayExtraBoldItalic';
-  src: url('./fonts/RedHatDisplay-ExtraBoldItalic.ttf') format('truetype');
+  font-family: "RedHatDisplayExtraBoldItalic";
+  src: url("./fonts/RedHatDisplay-ExtraBoldItalic.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-Italic */
 @font-face {
-  font-family: 'RedHatDisplayItalic';
-  src: url('./fonts/RedHatDisplay-Italic.ttf') format('truetype');
+  font-family: "RedHatDisplayItalic";
+  src: url("./fonts/RedHatDisplay-Italic.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-Light */
 @font-face {
-  font-family: 'RedHatDisplayLight';
-  src: url('./assets/fonts/RedHatDisplay-Light.ttf') format('truetype');
+  font-family: "RedHatDisplayLight";
+  src: url("./assets/fonts/RedHatDisplay-Light.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-LightItalic */
 @font-face {
-  font-family: 'RedHatDisplayLightItalic';
-  src: url('./fonts/RedHatDisplay-LightItalic.ttf') format('truetype');
+  font-family: "RedHatDisplayLightItalic";
+  src: url("./fonts/RedHatDisplay-LightItalic.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-Medium */
 @font-face {
-  font-family: 'RedHatDisplayMedium';
-  src: url('./fonts/RedHatDisplay-Medium.ttf') format('truetype');
+  font-family: "RedHatDisplayMedium";
+  src: url("./fonts/RedHatDisplay-Medium.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-MediumItalic */
 @font-face {
-  font-family: 'RedHatDisplayMediumItalic';
-  src: url('./fonts/RedHatDisplay-MediumItalic.ttf') format('truetype');
+  font-family: "RedHatDisplayMediumItalic";
+  src: url("./fonts/RedHatDisplay-MediumItalic.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-Regular */
 @font-face {
-  font-family: 'RedHatDisplayRegular';
-  src: url('./fonts/RedHatDisplay-Regular.ttf') format('truetype');
+  font-family: "RedHatDisplayRegular";
+  src: url("./fonts/RedHatDisplay-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-SemiBold */
 @font-face {
-  font-family: 'RedHatDisplaySemiBold';
-  src: url('./fonts/RedHatDisplay-SemiBold.ttf') format('truetype');
+  font-family: "RedHatDisplaySemiBold";
+  src: url("./fonts/RedHatDisplay-SemiBold.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 
 /* RedHatDisplay-SemiBoldItalic */
 @font-face {
-  font-family: 'RedHatDisplaySemiBoldItalic';
-  src: url('./fonts/RedHatDisplay-SemiBoldItalic.ttf') format('truetype');
+  font-family: "RedHatDisplaySemiBoldItalic";
+  src: url("./fonts/RedHatDisplay-SemiBoldItalic.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
@@ -116,72 +116,72 @@
 
 /* Clase para RedHatDisplayBlack */
 .RedHatDisplayBlack {
-  font-family: 'RedHatDisplayBlack';
+  font-family: "RedHatDisplayBlack";
 }
 
 /* Clase para RedHatDisplayBlackItalic */
 .RedHatDisplayBlackItalic {
-  font-family: 'RedHatDisplayBlackItalic';
+  font-family: "RedHatDisplayBlackItalic";
 }
 
 /* Clase para RedHatDisplayBold */
 .RedHatDisplayBold {
-  font-family: 'RedHatDisplayBold';
+  font-family: "RedHatDisplayBold";
 }
 
 /* Clase para RedHatDisplayBoldItalic */
 .RedHatDisplayBoldItalic {
-  font-family: 'RedHatDisplayBoldItalic';
+  font-family: "RedHatDisplayBoldItalic";
 }
 
 /* Clase para RedHatDisplayExtraBold */
 .RedHatDisplayExtraBold {
-  font-family: 'RedHatDisplayExtraBold';
+  font-family: "RedHatDisplayExtraBold";
 }
 
 /* Clase para RedHatDisplayExtraBoldItalic */
 .RedHatDisplayExtraBoldItalic {
-  font-family: 'RedHatDisplayExtraBoldItalic';
+  font-family: "RedHatDisplayExtraBoldItalic";
 }
 
 /* Clase para RedHatDisplayItalic */
 .RedHatDisplayItalic {
-  font-family: 'RedHatDisplayItalic';
+  font-family: "RedHatDisplayItalic";
 }
 
 /* Clase para RedHatDisplayLight */
 .RedHatDisplayLight {
-  font-family: 'RedHatDisplayLight';
+  font-family: "RedHatDisplayLight";
 }
 
 /* Clase para RedHatDisplayLightItalic */
 .RedHatDisplayLightItalic {
-  font-family: 'RedHatDisplayLightItalic';
+  font-family: "RedHatDisplayLightItalic";
 }
 
 /* Clase para RedHatDisplayMedium */
 .RedHatDisplayMedium {
-  font-family: 'RedHatDisplayMedium';
+  font-family: "RedHatDisplayMedium";
 }
 
 /* Clase para RedHatDisplayMediumItalic */
 .RedHatDisplayMediumItalic {
-  font-family: 'RedHatDisplayMediumItalic';
+  font-family: "RedHatDisplayMediumItalic";
 }
 
 /* Clase para RedHatDisplayRegular */
 .RedHatDisplayRegular {
-  font-family: 'RedHatDisplayRegular';
+  font-family: "RedHatDisplayRegular";
 }
 
 /* Clase para RedHatDisplaySemiBold */
 .RedHatDisplaySemiBold {
-  font-family: 'RedHatDisplaySemiBold';
+  font-family: "RedHatDisplaySemiBold";
 }
 
 /* Clase para RedHatDisplaySemiBoldItalic */
 .RedHatDisplaySemiBoldItalic {
-  font-family: 'RedHatDisplaySemiBoldItalic';
+  font-family: "RedHatDisplaySemiBoldItalic";
 }
 
 .navbar-brand img {
@@ -397,7 +397,7 @@
 .external-container-inicio {
   width: 100%;
   height: 135vh;
-  background-image: url(../../assets/Fondo.png) !important;
+  /* background-image: url(../../assets/Fondo.png) !important; */
   /* Make sure the path to your image is correct */
   background-repeat: no-repeat;
   background-size: cover;
@@ -563,7 +563,12 @@
   left: 0px;
   width: 100%;
   height: 100%;
-  background: linear-gradient(white 5%, transparent 35%, transparent 60%, white 85%);
+  background: linear-gradient(
+    white 5%,
+    transparent 35%,
+    transparent 60%,
+    white 85%
+  );
 }
 
 @keyframes rotateUpDown {
@@ -628,17 +633,17 @@
 }
 
 .custom-puntaje {
-    bottom: 100px;
-    background: linear-gradient(to bottom, #6ed4e1, #6ed4e1);
-    border: none;
-    color: red;
-    padding: 6px 18px;
-    font-size: 30px !important;
-    font-weight: bold;
-    /* cursor: pointer; */
-    box-shadow: 0 12px #6ed4e1;
-    /* transition: all 0.2s ease; */
-    margin-right: 0px;
+  bottom: 100px;
+  background: linear-gradient(to bottom, #6ed4e1, #6ed4e1);
+  border: none;
+  color: red;
+  padding: 6px 18px;
+  font-size: 30px !important;
+  font-weight: bold;
+  /* cursor: pointer; */
+  box-shadow: 0 12px #6ed4e1;
+  /* transition: all 0.2s ease; */
+  margin-right: 0px;
 }
 
 .custom-with {
@@ -659,7 +664,6 @@
   margin-top: -130px;
 }
 
-
 .btn-back {
   position: absolute;
   bottom: -80px;
@@ -676,19 +680,19 @@
   margin-right: 7px;
 }
 
-
-
-
-
-
 .btn-startGame {
   margin-top: 2rem;
-  background: linear-gradient(to bottom, #6ed4e1, #6ed4e1);
+  background: #f50000;
+  background: linear-gradient(
+    90deg,
+    rgba(245, 0, 0, 1) 0%,
+    rgba(207, 14, 135, 1) 100%
+  );
   border: none;
   border-radius: 40px;
-  color: red;
+  color: white;
   padding: 5px 40px;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -701,7 +705,7 @@
   border: 1px solid white;
 }
 
-.second-custom-button-gol{
+.second-custom-button-gol {
   margin-top: 2rem;
   background: linear-gradient(to bottom, #6ed4e1, #6ed4e1);
   border: none;
@@ -736,6 +740,42 @@
   border: white;
 }
 
-.text-thanks-end{
+.text-thanks-end {
   font-size: 40px;
+}
+
+.text-avianca {
+  color: #f60000;
+}
+
+.hidden-desktop {
+  display: block;
+}
+
+.introSection h1 {
+  font-size: 50px;
+  margin: 3rem 0;
+}
+
+.introSection button {
+  margin: 10rem 0;
+}
+
+@media (min-width: 769px) {
+  .hidden-desktop {
+    display: none;
+  }
+
+  .hidden-mobile {
+    display: block;
+  }
+
+  .btn-startGame {
+    font-size: 40px;
+  }
+
+  .introSection h1 {
+    font-size: 50px;
+    margin: 3rem 0;
+  }
 }
