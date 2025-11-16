@@ -107,10 +107,15 @@ function closeGame() {
   const finalImage = getImageForScore(currentScore);
   ui.finalImage.src = finalImage;
 
+  ui.body.classList.remove('state-game');
+  ui.body.classList.add('state-scoring');
+
   setTimeout(() => {
     ui.card.classList.replace('d-block', 'd-none');
     ui.footer.style.display = 'none';
     ui.finalSection.style.display = 'block';
+    ui.body.classList.remove('state-scoring');
+    ui.body.classList.add('state-final-image');
   }, 4000);
 
   setTimeout(() => {
@@ -118,7 +123,9 @@ function closeGame() {
     ui.finalSectionWithBtn.style.display = 'block';
     ui.footer.style.display = 'block';
     ui.reload.classList.remove('d-none');
-    ui.lastImage.src = 'assets/Fondo.png';
+    ui.body.classList.remove('state-final-image');
+    ui.body.classList.add('state-final-buttons');
+
   }, 10000);
 
   ui.body.id = 'reload';
@@ -184,6 +191,9 @@ function startCountdown() {
   if (hasClicked) return;
   hasClicked = true;
 
+  ui.body.classList.remove('state-scream-setup');
+  ui.body.classList.add('state-game');
+
   let countdown = 5;
   ui.overlay.style.display = 'block';
   ui.countdown.textContent = countdown;
@@ -220,6 +230,8 @@ function setupListeners() {
     setTimeout(() => {
       ui.intro.style.display = 'none';
       ui.game.style.display = 'block';
+      ui.body.classList.remove('state-intro');
+      ui.body.classList.add('state-scream-setup');
     }, 50);
   });
 
@@ -230,4 +242,5 @@ function setupListeners() {
 document.addEventListener('DOMContentLoaded', () => {
   initMic();
   setupListeners();
+  ui.body.classList.add('state-intro');
 });

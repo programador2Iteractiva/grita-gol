@@ -396,19 +396,57 @@
 
 .external-container-inicio {
   width: 100%;
-  height: 135vh;
-  /* background-image: url(../../assets/Fondo.png) !important; */
-  /* Make sure the path to your image is correct */
+  height: 135vh; 
+  
+  background-position: 
+    center top,      /* Capa 1: Pegada arriba */
+    center bottom,   /* Capa 2: Pegada abajo */
+    center center;   /* Capa 3: Centrada */
+
+  background-size: 
+    100% auto,       /* Capa 1: 100% de ancho, alto automático */
+    100% auto,       /* Capa 2: 100% de ancho, alto automático */
+    cover;           /* Capa 3: Cubre todo el espacio */
+
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+
+  background-attachment: 
+    fixed,           /* Capa 1: Se queda fija arriba */
+    fixed,           /* Capa 2: Se queda fija abajo */
+    fixed;           /* Capa 3: El fondo también se queda fijo */
+
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
+  position: relative; 
 }
+
+.state-intro .external-container-inicio,
+.state-scream-setup .external-container-inicio{
+  background-image: 
+    url(assets/cancha-superior.png),  
+    url(assets/cancha-inferior.png),         
+    url(assets/Fondo.png);
+}
+
+.state-game .external-container-inicio,
+.state-scoring .external-container-inicio,
+.state-final-image .external-container-inicio,
+.state-final-buttons .external-container-inicio
+{
+  background-image: 
+    url(assets/cancha-superior.png),        
+    url(assets/cancha-balon.png),          
+    url(assets/Fondo.png);
+}
+
+.state-final-buttons #counterScore {
+  display: none !important;
+}
+
 
 .position-relative {
   position: relative;
