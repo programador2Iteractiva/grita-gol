@@ -443,6 +443,7 @@
     url(assets/Fondo.png);
 }
 
+.state-final-image #counterScore,
 .state-final-buttons #counterScore {
   display: none !important;
 }
